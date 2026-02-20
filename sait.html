@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>FLOPPO4CA SERVER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            background-color: #1a0000;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 10px;
+        }
+        
+        .main-card {
+            max-width: 900px;
+            width: 100%;
+            background: #2a0000;
+            border: 4px solid #8b0000;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 40px #8b0000;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #8b0000;
+            padding-bottom: 10px;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            color: #ff4d4d;
+            text-shadow: 0 0 10px #ff0000;
+            letter-spacing: 1px;
+        }
+        
+        .address-block {
+            text-align: center;
+            background: #1f0000;
+            border: 3px solid #b22222;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .server-address {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6666;
+            background: #330000;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 2px solid #8b0000;
+            margin-bottom: 10px;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        
+        .server-port {
+            font-size: 20px;
+            color: #ff9999;
+            background: #330000;
+            padding: 6px 14px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 1px solid #b22222;
+        }
+        
+        .status-section {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .online-status {
+            font-size: 1.8em;
+            color: #00ff00;
+            text-shadow: 0 0 15px #00ff00;
+            margin-bottom: 5px;
+        }
+        
+        .status-text {
+            color: #b22222;
+            font-size: 1em;
+        }
+        
+        .info-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .info-card {
+            flex: 1;
+            min-width: 140px;
+            background: #1f0000;
+            border: 2px solid #8b0000;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .info-card h3 {
+            color: #ff6666;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        
+        .info-card p {
+            color: #ff9999;
+            font-size: 1em;
+        }
+        
+        .version-info {
+            background: #1f0000;
+            border: 3px solid #8b0000;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .version-title {
+            color: #ff4d4d;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #8b0000;
+            padding-bottom: 8px;
+        }
+        
+        .version-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .version-col {
+            flex: 1;
+            min-width: 200px;
+            background: #330000;
+            border: 2px solid #b22222;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .version-col h4 {
+            color: #ff8080;
+            font-size: 1.3em;
+            border-bottom: 2px solid #b22222;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .version-list {
+            color: #ffb3b3;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .feature-item {
+            background: #2a0000;
+            border-left: 5px solid #b22222;
+            padding: 10px;
+            color: #ffb3b3;
+            font-size: 0.95em;
+            list-style: none;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .news-block {
+            background: #1f0000;
+            border: 3px solid #8b0000;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .news-title {
+            color: #ff6666;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        
+        .news-item {
+            color: #ffb3b3;
+            font-size: 0.95em;
+            margin: 6px 0;
+        }
+        
+        .footer {
+            text-align: center;
+            border-top: 2px solid #8b0000;
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+        
+        .footer-ip {
+            color: #ff6666;
+            font-size: 1.1em;
+            margin: 5px 0;
+            user-select: all;
+        }
+        
+        .footer-versions {
+            color: #8b0000;
+            font-size: 0.95em;
+        }
+        
+        * {
+            transform: none !important;
+            animation: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-card">
+        <div class="header">
+            <h1>⚡ FLOPPO4CA ⚡</h1>
+            <p style="color: #ff9999; font-size: 0.9em;">Dark Red Edition</p>
+        </div>
+        
+        <div class="address-block">
+            <div class="server-address">FLOPPO4CA.aternos.me</div>
+            <div class="server-port">порт 19487</div>
+        </div>
+        
+        <div class="status-section">
+            <div class="online-status">● ONLINE 24/7 ●</div>
+            <div class="status-text">стабильно без перезагрузок</div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>⚔️ Java</h3>
+                <p>1.21.11</p>
+            </div>
+            <div class="info-card">
+                <h3>📱 Bedrock</h3>
+                <p>1.21.111.01 -<br>1.21.132.03</p>
+            </div>
+            <div class="info-card">
+                <h3>👥 Онлайн</h3>
+                <p>0-100</p>
+            </div>
+            <div class="info-card">
+                <h3>⏰ Uptime</h3>
+                <p>24/7</p>
+            </div>
+        </div>
+        
+        <div class="version-info">
+            <div class="version-title">📌 ПОДДЕРЖИВАЕМЫЕ ВЕРСИИ</div>
+            <div class="version-row">
+                <div class="version-col">
+                    <h4>Java Edition</h4>
+                    <div class="version-list">
+                        <div>1.21.11</div>
+                    </div>
+                </div>
+                <div class="version-col">
+                    <h4>Bedrock Edition</h4>
+                    <div class="version-list">
+                        <div>1.21.111.01 - 1.21.132.03</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <ul class="features-list">
+            <li class="feature-item">⚡ КРОСС-ПЛАТФОРМА Java + Bedrock</li>
+            <li class="feature-item">🔴 БЕСПЛАТНО</li>
+            <li class="feature-item">💣 ВЗРЫВЫ РАЗРЕШЕНЫ</li>
+            <li class="feature-item">🎮 ЛЮБАЯ ВЕРСИЯ</li>
+            <li class="feature-item">🌙 ЗАХОДИ С ТЕЛЕФОНА</li>
+            <li class="feature-item">💻 ЗАХОДИ С ПК</li>
+        </ul>
+        
+        <div class="news-block">
+            <div class="news-title">🔥 НОВОСТИ:</div>
+            <div class="news-item">➤ 24/7 без остановок</div>
+            <div class="news-item">➤ Адрес: FLOPPO4CA.aternos.me</div>
+            <div class="news-item">➤ Порт: 19487</div>
+            <div class="news-item">➤ Java: 1.21.11</div>
+            <div class="news-item">➤ Bedrock: 1.21.111.01 - 1.21.132.03</div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-ip">FLOPPO4CA.aternos.me:19487</div>
+            <div class="footer-versions">Java 1.21.11 | Bedrock 1.21.111.01-1.21.132.03</div>
+            <div style="color: #b22222; margin-top: 10px;">© 2025 FLOPPO4CA</div>
+        </div>
+    </div>
+</body>
+</html>
